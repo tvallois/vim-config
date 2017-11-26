@@ -1,0 +1,94 @@
+set nocompatible              " required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"
+" " alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+"
+" " let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'sudar/comments.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'nvie/vim-flake8'
+"
+" " Add all your plugins here (note older versions of Vundle used Bundle
+" instead of Plugin)
+"
+"
+" " All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on
+filetype plugin on
+
+set nu
+
+execute pathogen#infect()
+syntax on
+let mapleader=","
+nnoremap <C-Down> <C-W><C-J>
+nnoremap <C-Up> <C-W><C-K>
+nnoremap <C-Right> <C-W><C-L>
+nnoremap <C-Left> <C-W><C-H>
+
+set foldmethod=indent
+set foldlevel=99
+set statusline+=%F
+nnoremap <space> za
+map <C-n> :NERDTreeToggle<CR>
+map <C-b> :cnext<CR>
+map <C-m> :cprevious<CR>
+
+set autowrite
+set splitbelow
+set splitright
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+"let g:go_metalinter_autosave = 1
+
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_fmt_command = "goimports"
+
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+map <Leader> n <plug>NERDTreeTabsToggle<CR>
+
+map <leader><Right> :tabn<CR>
+map <leader><Left> :tabp<CR>
+autocmd vimenter * NERDTree
+nmap <F8> :TagbarToggle<CR>
+nmap <leader>( [{<CR>
+nmap <leader>) ]}<CR>
+
+nnoremap <del> daw <CR>
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
