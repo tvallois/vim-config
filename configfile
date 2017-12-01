@@ -81,7 +81,6 @@ hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=whi
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-map <Leader> n <plug>NERDTreeTabsToggle<CR>
 
 map <leader><Right> :tabn<CR>
 map <leader><Left> :tabp<CR>
@@ -129,7 +128,12 @@ match OverLength /\%81v.\+/
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
+let g:UltiSnipsUsePythonVersion = 3
+let g:pymode_python= 'python3'
 let NERDTreeIgnore=['\.o$', '\~$', '__pycache__']
+let g:pymode = 1
+let g:pymode_rope = 1
+let g:pymode_rope_autoimport = 0
+nmap <leader>q :call pymode#rope#goto_definition()<CR>
+let g:pymode_rope_goto_definition_bind = '<C-q>'
+let g:pymode_rope_goto_definition_cmd = 'new'
